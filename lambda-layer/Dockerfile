@@ -20,7 +20,7 @@ RUN curl -L http://download.osgeo.org/geos/geos-3.7.1.tar.bz2 | tar jxf - -C /tm
 
 # Install python packages we want
 
-RUN pip install --upgrade metpy pytest pandas pint pooch traitlets scipy netCDF4 matplotlib python-dateutil==2.8.0 -t python/
+RUN pip install --upgrade xarray zarr dask pytest pandas pint pooch traitlets scipy netCDF4 matplotlib python-dateutil==2.8.0 -t python/
 RUN export PYTHONPATH=/var/task/python:$PYTHONPATH; LD_LIBRARY_PATH=/var/task/lib:$LD_LIBRARY_PATH; export PATH=/var/task/bin:$PATH; pip install --global-option=build_ext --global-option="-I/var/task/include" --global-option="-L/var/task/lib" --upgrade cartopy==0.18.0b1 -t python/
 
 
@@ -33,5 +33,5 @@ RUN rm -rf lib/*.a python/setuptools/*.exe python/pandas/tests python/scipy/stat
 
 # Package the layer up into a zip file we can extract
 
-RUN zip -r9 "metpy_layer.zip" ./python ./lib
+RUN zip -r9 "edr_layer.zip" ./python ./lib
 
